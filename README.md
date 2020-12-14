@@ -43,6 +43,9 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+Closure, in short, describes inheritance in JavaScript through functions and scope - it is the result of functions being able to look outward for context and variables, but not inward. This can be useful in extending a variables lifespan, making private variables accessible but not mutable globally, and making the outer function's variables and inner function's execution and functionality available for use by multiple separate functions and variables globally.
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -64,8 +67,16 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+Closure is used in the inner function reaching outward to find the context of the passed variable, "name", as well as in the hoisting of the inner function through the outer function to the named global consts to be used in multiple separate instances.
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+  The first part of the result of the function - the returned string - "Dan rolled a" is static, and thus is the same every time this function is called, while the number rolled is subject to change because of the operation of the 'newRoll' inner variable.
+
 c. What is the lexical scope of `newRoll`? 
+
+Block/function scoped.
 
 
 ### Task 3 - Stretch Goals
