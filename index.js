@@ -28,11 +28,17 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+
+  Counter 1 declares it's 'counter variable' within the counter function itself and increments / returns that value post-calculation via a closure, while Counter 2 establishes it's 'counter variable' outside the counter function's scope.
   
   2. Which of the two uses a closure? How can you tell?
+
+  Counter 1 uses a closure to both hold the count variable in memory as well as perform the incrementing calculation on it - you can tell because of the marking inner function being returned by the outer function, which is then initialized as the value of a new const. In short, making the count variable private, accessible only to the function and inner function, but affected by the determined counting operation in the inner function, which is itself operable by calling our new const function.
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+     Counter 1 might be more preferable in a situation where you need to count how many times a specific event happens in a larger set of code while holding each change or increment to that inner count variable in memory, while counter 2 might be more preferable in a situation where you're using a loop to increment or change that variable a single or predetermined amount of times.
 */
 
 // counter1 code
@@ -62,8 +68,8 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+    return Math.round(Math.random() * 2);
 }
 
 
@@ -81,18 +87,48 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(score, innings){
+  let home = 0;
+  let away = 0;
+  let inningCount = 0;
+
+  while(inningCount < innings){
+    if(inningCount / 2 === 0){
+      home += score();
+    } else {
+      away += score();
+    }
+    inningCount++;
+  }
+  return {Home: home, Away: away};
 }
+
+console.log(finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
-
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function coinflip(){
+  return Math.round(Math.random());
 }
+  
+
+function getInningScore(score) {
+  let home = 0;
+  let away = 0;
+
+  for(let i = 0; i < 10; i++){
+    if(coinflip() === 0){
+      home += score();
+    } else if(coinflip() === 1){
+      away += score();
+    }
+  }
+  return {Home: home, Away: away};
+}
+
+console.log(getInningScore(inning));
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
